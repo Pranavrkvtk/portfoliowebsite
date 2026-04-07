@@ -13,6 +13,7 @@ function Projects() {
     {
       title: "Deepthigas Web App",
       desc: "Full-stack product built with Java + React",
+      link: "https://deepthigas-reactjs.vercel.app/",
     },
   ];
 
@@ -25,6 +26,18 @@ function Projects() {
           <div className="project-card" key={index}>
             <h3>{project.title}</h3>
             <p>{project.desc}</p>
+
+            {/* ✅ Show button only if link exists */}
+            {project.link && (
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="project-btn"
+              >
+                View Project 🚀
+              </a>
+            )}
           </div>
         ))}
       </div>

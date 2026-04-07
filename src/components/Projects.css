@@ -44,8 +44,79 @@
   transition: all 0.4s ease;
   text-align: left;
   overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  animation: floatCard 6s ease-in-out infinite;
 }
 
+/* 🔥 FIXED overlay (click safe) */
+.project-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  padding: 1px;
+  background: linear-gradient(135deg, #38bdf8, #6366f1, #ec4899);
+
+  -webkit-mask: 
+    linear-gradient(#000 0 0) content-box, 
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+
+  opacity: 0.3;
+
+  pointer-events: none; /* 🔥 IMPORTANT FIX */
+}
+
+/* ✨ Hover */
+.project-card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 20px 40px rgba(56, 189, 248, 0.25);
+}
+
+/* 🌟 Title */
+.project-card h3 {
+  margin-bottom: 12px;
+  font-size: 1.4rem;
+
+  background: linear-gradient(135deg, #38bdf8, #6366f1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* 📄 Description */
+.project-card p {
+  color: #cbd5f5;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* 🔘 Button FIXED */
+.project-btn {
+  margin-top: auto;
+  margin-top: 16px;
+  padding: 8px 14px;
+  border-radius: 6px;
+
+  background: linear-gradient(135deg, #6366f1, #38bdf8);
+  color: white;
+  text-decoration: none;
+  font-size: 13px;
+
+  transition: all 0.3s ease;
+
+  position: relative;
+  z-index: 2; /* 🔥 ensures clickable */
+}
+
+.project-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(56, 189, 248, 0.4);
+}
 /* 🔥 Glow border effect */
 .project-card::before {
   content: "";
@@ -125,4 +196,23 @@
   .projects h2 {
     font-size: 1.8rem;
   }
+}
+
+.project-btn {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 8px 14px;
+  border-radius: 6px;
+
+  background: linear-gradient(135deg, #6366f1, #38bdf8);
+  color: white;
+  text-decoration: none;
+  font-size: 13px;
+
+  transition: all 0.3s ease;
+}
+
+.project-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(56, 189, 248, 0.4);
 }
