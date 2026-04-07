@@ -29,7 +29,7 @@ const SKILLS = [
 ];
 
 const STATS = [
-  { num: "4+", label: "Years exp." },
+  { num: "2+", label: "Years exp." },
   { num: "20+", label: "Projects" },
   { num: "8+", label: "Technologies" },
   { num: "100%", label: "Dedication" },
