@@ -9,10 +9,11 @@ export default function Navbar() {
 
       {/* LOGO */}
       <div className="brand">
-        <div className="brand__logo">P</div>
-        <div className="brand__text">
-          <h1>Pranav</h1>
-          <p className="subtitle">Full Stack Developer</p>
+
+
+
+       <div className="brand__text">
+<h1 className="brand-name">PORT-FOLIO WEBSITE</h1>        
         </div>
       </div>
 

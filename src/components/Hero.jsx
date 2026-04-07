@@ -1,18 +1,49 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./Hero.css";
 
 const PHRASES = [
+  "I am a Fullstack Developer",
   "Java Backend Developer",
   "React & Next.js Engineer",
   "Microservices Architect",
-  "Cloud & DevOps Enthusiast",
 ];
 
 function useTypewriter(phrases) {
   const [text, setText] = useState("");
   const state = useRef({ pi: 0, ci: 0, deleting: false });
 
+  useEffect(() => {
+    const type = () => {
+      const current = phrases[state.current.pi];
+      const { ci, deleting } = state.current;
 
+      if (!deleting) {
+        const newText = current.slice(0, ci + 1);
+        setText(newText);
+        state.current.ci++;
+
+        if (newText === current) {
+          state.current.deleting = true;
+          setTimeout(type, 1500);
+          return;
+        }
+      } else {
+        const newText = current.slice(0, ci - 1);
+        setText(newText);
+        state.current.ci--;
+
+        if (newText === "") {
+          state.current.deleting = false;
+          state.current.pi =
+            (state.current.pi + 1) % phrases.length;
+        }
+      }
+
+      setTimeout(type, deleting ? 50 : 100);
+    };
+
+    type();
+  }, [phrases]);
 
   return text;
 }
@@ -46,7 +77,6 @@ export default function Hero() {
   const cardRef = useRef(null);
   const [flipped, setFlipped] = useState(false);
 
-
   return (
     <section className="hero" id="home">
       <div className="bg-grid" />
@@ -71,7 +101,9 @@ export default function Hero() {
             <div className="t-dot" style={{ background: "#febc2e" }} />
             <div className="t-dot" style={{ background: "#28c840" }} />
           </div>
+
           <div className="t-line">~ portfolio $</div>
+
           <div>
             <span className="t-prompt">▶ </span>
             <span className="t-text">{typed}</span>
@@ -96,15 +128,13 @@ export default function Hero() {
           ))}
         </div>
 
-   <div className="btns">
-  <a href="#contact" className="btn-p">Hire me</a>
-  <a href="#projects" className="btn-g">View projects</a>
-
-  {/* ✅ Resume Download */}
-  <a href="/resume.pdf" download className="btn-r">
-    Download Resume
-  </a>
-</div>
+        <div className="btns">
+          <a href="#contact" className="btn-p">Hire me</a>
+          <a href="#projects" className="btn-g">View projects</a>
+          <a href="/doc1.pdf" download className="btn-p">
+            Download Resume
+          </a>
+        </div>
       </div>
 
       {/* RIGHT */}
@@ -118,7 +148,6 @@ export default function Hero() {
             {/* FRONT */}
             <div className="card-face card-front">
               <div className="avatar-hex">
-                {/* ✅ IMAGE FIXED HERE */}
                 <img src="/img1.JPG" alt="Pranav" />
               </div>
 

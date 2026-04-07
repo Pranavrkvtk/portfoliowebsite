@@ -580,3 +580,21 @@ h1 {
     transform: scale(1.05);
   }
 }
+@media (max-width: 480px) {
+  .btns {
+    display: flex;
+    flex-direction: row;   /* 🔥 keep in one row */
+    flex-wrap: nowrap;     /* ❗ prevent wrapping */
+    gap: 8px;
+    width: 100%;
+  }
+
+  .btn-p,
+  .btn-g,
+  .btn-r {
+    flex: 1;               /* equal width */
+    padding: 10px;
+    font-size: 12px;
+    text-align: center;
+  }
+}
