@@ -1,4 +1,4 @@
-/* About.css - Complete Full Size Styles */
+/* About.css - Full Width, No Sidebar */
 
 * {
   margin: 0;
@@ -6,14 +6,18 @@
   box-sizing: border-box;
 }
 
-/* ===== Base Section Styles ===== */
+/* ===== Base Section Styles - Full Width ===== */
 .about {
   position: relative;
   min-height: 100vh;
-  width: 100%;
+  width: 100vw;
+  max-width: 100%;
   background: linear-gradient(135deg, #0a0a12 0%, #0f0f1a 100%);
   overflow-x: hidden;
   padding: 6rem 0;
+  margin: 0;
+  left: 0;
+  right: 0;
 }
 
 .ab-grid-bg {
@@ -842,124 +846,5 @@
   
   .legend-item {
     font-size: 0.7rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .skills-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .bio-stats {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.75rem;
-  }
-  
-  .bs-num {
-    font-size: 1.6rem;
-  }
-  
-  .bs-label {
-    font-size: 0.65rem;
-  }
-  
-  .id-avatar {
-    width: 90px;
-    height: 90px;
-  }
-  
-  .id-name {
-    font-size: 1.4rem;
-  }
-  
-  .id-role {
-    font-size: 0.7rem;
-  }
-  
-  .id-tag {
-    font-size: 0.65rem;
-    padding: 0.2rem 0.7rem;
-  }
-  
-  .tl-label {
-    font-size: 1.5rem;
-  }
-  
-  .journey-summary {
-    flex-direction: column;
-    align-items: stretch;
-    text-align: center;
-  }
-  
-  .summary-arrow {
-    display: none;
-  }
-  
-  .summary-item {
-    justify-content: center;
-  }
-  
-  .section-pill {
-    margin-bottom: 1.5rem;
-  }
-  
-  .pill-text {
-    font-size: 0.75rem;
-  }
-}
-
-/* ===== Scrollbar Styling ===== */
-.timeline-graph::-webkit-scrollbar {
-  height: 8px;
-}
-
-.timeline-graph::-webkit-scrollbar-track {
-  background: rgba(15, 23, 42, 0.5);
-  border-radius: 10px;
-}
-
-.timeline-graph::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #6366f1, #f59e0b);
-  border-radius: 10px;
-}
-
-.timeline-graph::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #8183ff, #fbbf24);
-}
-
-/* ===== Selection Style ===== */
-::selection {
-  background: rgba(99, 102, 241, 0.3);
-  color: #f1f5f9;
-}
-
-/* ===== Print Styles ===== */
-@media print {
-  .about {
-    background: white;
-    color: black;
-    padding: 0;
-  }
-  
-  .ab-glow,
-  .graph-background,
-  .graph-path-glow,
-  .ab-grid-bg {
-    display: none;
-  }
-  
-  .tl-card {
-    border: 1px solid #ccc;
-    break-inside: avoid;
-    background: white;
-  }
-  
-  .sk-card {
-    break-inside: avoid;
-  }
-  
-  .tl-current-badge {
-    background: #ccc;
-    color: black;
   }
 }

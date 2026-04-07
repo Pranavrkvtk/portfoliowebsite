@@ -1,4 +1,4 @@
-// About.jsx - Complete Component with Full CSS
+// About.jsx - Complete Component with Sidebar Removed (Full Width)
 import "./About.css";
 
 const SKILLS = [
@@ -29,7 +29,7 @@ const SKILLS = [
 ];
 
 const STATS = [
-  { num: "2+", label: "Years exp." },
+  { num: "4+", label: "Years exp." },
   { num: "20+", label: "Projects" },
   { num: "8+", label: "Technologies" },
   { num: "100%", label: "Dedication" },

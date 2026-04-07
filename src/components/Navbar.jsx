@@ -13,7 +13,6 @@ export default function Navbar() {
 
 
        <div className="brand__text">
-<h1 className="brand-name">PORT-FOLIO WEBSITE</h1>        
         </div>
       </div>
 
