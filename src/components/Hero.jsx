@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import "./Hero.css";
 
 const PHRASES = [
@@ -12,38 +12,7 @@ function useTypewriter(phrases) {
   const [text, setText] = useState("");
   const state = useRef({ pi: 0, ci: 0, deleting: false });
 
-  useEffect(() => {
-    let timeout;
 
-    function tick() {
-      const { pi, ci, deleting } = state.current;
-      const phrase = phrases[pi];
-
-      if (!deleting) {
-        setText(phrase.slice(0, ci + 1));
-        state.current.ci++;
-
-        if (state.current.ci === phrase.length) {
-          state.current.deleting = true;
-          timeout = setTimeout(tick, 1800);
-          return;
-        }
-      } else {
-        setText(phrase.slice(0, ci - 1));
-        state.current.ci--;
-
-        if (state.current.ci === 0) {
-          state.current.deleting = false;
-          state.current.pi = (pi + 1) % phrases.length;
-        }
-      }
-
-      timeout = setTimeout(tick, state.current.deleting ? 40 : 80);
-    }
-
-    timeout = setTimeout(tick, 80);
-    return () => clearTimeout(timeout);
-  }, [phrases]);
 
   return text;
 }
@@ -77,10 +46,6 @@ export default function Hero() {
   const cardRef = useRef(null);
   const [flipped, setFlipped] = useState(false);
 
-  useEffect(() => {
-    const id = setInterval(() => setFlipped((f) => !f), 5000);
-    return () => clearInterval(id);
-  }, []);
 
   return (
     <section className="hero" id="home">
