@@ -14,6 +14,7 @@ function useTypewriter(phrases) {
 
   useEffect(() => {
     let timeout;
+
     function tick() {
       const { pi, ci, deleting } = state.current;
       const phrase = phrases[pi];
@@ -21,6 +22,7 @@ function useTypewriter(phrases) {
       if (!deleting) {
         setText(phrase.slice(0, ci + 1));
         state.current.ci++;
+
         if (state.current.ci === phrase.length) {
           state.current.deleting = true;
           timeout = setTimeout(tick, 1800);
@@ -29,13 +31,16 @@ function useTypewriter(phrases) {
       } else {
         setText(phrase.slice(0, ci - 1));
         state.current.ci--;
+
         if (state.current.ci === 0) {
           state.current.deleting = false;
           state.current.pi = (pi + 1) % phrases.length;
         }
       }
+
       timeout = setTimeout(tick, state.current.deleting ? 40 : 80);
     }
+
     timeout = setTimeout(tick, 80);
     return () => clearTimeout(timeout);
   }, [phrases]);
@@ -72,7 +77,6 @@ export default function Hero() {
   const cardRef = useRef(null);
   const [flipped, setFlipped] = useState(false);
 
-  // Auto-flip card every 5 s
   useEffect(() => {
     const id = setInterval(() => setFlipped((f) => !f), 5000);
     return () => clearInterval(id);
@@ -84,7 +88,7 @@ export default function Hero() {
       <div className="noise" />
       <div className="bg-split" />
 
-      {/* ── LEFT ── */}
+      {/* LEFT */}
       <div className="left">
         <div className="badge">
           <div className="badge-dot" />
@@ -111,14 +115,13 @@ export default function Hero() {
         </div>
 
         <p className="desc">
-          Building scalable microservices &amp; modern web apps that power
-          exceptional user experiences.
+          Building scalable microservices & modern web apps.
         </p>
 
         <div className="stats">
           {[
-            { num: "4+", label: "YRS EXPERIENCE" },
-            { num: "20+", label: "PROJECTS" },
+            { num: "2+", label: "YRS EXPERIENCE" },
+            { num: "10+", label: "PROJECTS" },
             { num: "100%", label: "SATISFACTION" },
           ].map(({ num, label }) => (
             <div key={label} className="s-item">
@@ -134,59 +137,53 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* ── RIGHT ── */}
+      {/* RIGHT */}
       <div className="right">
         <div className="scene3d">
-          <div className="orbit"><div className="orbit-dot" /></div>
-          <div className="orbit2"><div className="orbit2-dot" /></div>
 
-          <div ref={cardRef} className={`card-3d ${flipped ? "is-flipped" : ""}`}>
-            {/* Front */}
+          <div
+            ref={cardRef}
+            className={`card-3d ${flipped ? "is-flipped" : ""}`}
+          >
+            {/* FRONT */}
             <div className="card-face card-front">
               <div className="avatar-hex">
-                <div className="hex">PK</div>
+                {/* ✅ IMAGE FIXED HERE */}
+                <img src="/img1.JPG" alt="Pranav" />
               </div>
+
               <div className="card-name">Pranav R K</div>
-              <div className="card-role">JAVA · REACT · MICROSERVICES</div>
+              <div className="card-role">
+                JAVA · REACT · MICROSERVICES
+              </div>
             </div>
 
-            {/* Back */}
+            {/* BACK */}
             <div className="card-face card-back">
-              <div className="card-name" style={{ fontSize: 14, marginBottom: 4 }}>
-                Skills
-              </div>
-              <div className="card-bar" />
-              <div className="skill-row">
-                <SkillBar
-                  label="Java / Spring Boot"
-                  pct={92}
-                  color="linear-gradient(90deg,#6366f1,#8b5cf6)"
-                />
-                <SkillBar
-                  label="React / Next.js"
-                  pct={85}
-                  color="linear-gradient(90deg,#06b6d4,#3b82f6)"
-                />
-                <SkillBar
-                  label="AWS / Docker / K8s"
-                  pct={78}
-                  color="linear-gradient(90deg,#ec4899,#f59e0b)"
-                />
-              </div>
+              <div style={{ fontSize: 14 }}>Skills</div>
+
+              <SkillBar
+                label="Java / Spring Boot"
+                pct={92}
+                color="linear-gradient(90deg,#6366f1,#8b5cf6)"
+              />
+              <SkillBar
+                label="React"
+                pct={85}
+                color="linear-gradient(90deg,#06b6d4,#3b82f6)"
+              />
+              <SkillBar
+                label="AWS"
+                pct={78}
+                color="linear-gradient(90deg,#ec4899,#f59e0b)"
+              />
             </div>
           </div>
 
-          <div className="cube-cluster">
-            <Cube className="cube-a" />
-            <Cube className="cube-b" />
-            <Cube className="cube-c" />
-          </div>
+          <Cube className="cube-a" />
+          <Cube className="cube-b" />
+          <Cube className="cube-c" />
         </div>
-      </div>
-
-      <div className="scroll-hint">
-        <div className="scroll-arrow" />
-        <span>scroll to explore</span>
       </div>
     </section>
   );
