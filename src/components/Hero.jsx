@@ -131,10 +131,15 @@ export default function Hero() {
           ))}
         </div>
 
-        <div className="btns">
-          <a href="#contact" className="btn-p">Hire me</a>
-          <a href="#projects" className="btn-g">View projects</a>
-        </div>
+   <div className="btns">
+  <a href="#contact" className="btn-p">Hire me</a>
+  <a href="#projects" className="btn-g">View projects</a>
+
+  {/* ✅ Resume Download */}
+  <a href="/resume.pdf" download className="btn-r">
+    Download Resume
+  </a>
+</div>
       </div>
 
       {/* RIGHT */}
