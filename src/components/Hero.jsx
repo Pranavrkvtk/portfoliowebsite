@@ -24,7 +24,7 @@ function useTypewriter(phrases) {
 
         if (newText === current) {
           state.current.deleting = true;
-          setTimeout(type, 1500);
+          setTimeout(type, 2200); // 🔥 longer pause
           return;
         }
       } else {
@@ -39,7 +39,8 @@ function useTypewriter(phrases) {
         }
       }
 
-      setTimeout(type, deleting ? 50 : 100);
+      // 🔥 SLOWER SPEED
+      setTimeout(type, deleting ? 90 : 180);
     };
 
     type();
@@ -145,17 +146,7 @@ export default function Hero() {
             ref={cardRef}
             className={`card-3d ${flipped ? "is-flipped" : ""}`}
           >
-            {/* FRONT */}
-            <div className="card-face card-front">
-              <div className="avatar-hex">
-                <img src="/img1.JPG" alt="Pranav" />
-              </div>
 
-              <div className="card-name">Pranav R K</div>
-              <div className="card-role">
-                JAVA · REACT · MICROSERVICES
-              </div>
-            </div>
 
             {/* BACK */}
             <div className="card-face card-back">
@@ -178,10 +169,14 @@ export default function Hero() {
               />
             </div>
           </div>
+{/* Cubes */}
+<Cube className="cube-a" />
+<Cube className="cube-b" />
+<Cube className="cube-c" />
 
-          <Cube className="cube-a" />
-          <Cube className="cube-b" />
-          <Cube className="cube-c" />
+{/* 🔥 NEW CUBES */}
+<Cube className="cube-e" />
+<Cube className="cube-f" />
         </div>
       </div>
     </section>

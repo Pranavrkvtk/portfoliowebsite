@@ -605,3 +605,31 @@
 .copy-btn {
   transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
 }
+
+/* LinkedIn Button */
+.linkedin-btn {
+  background: linear-gradient(135deg, #0077b5, #0a66c2);
+  color: white;
+}
+
+.linkedin-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0,119,181,0.6);
+}
+
+/* Small polish */
+.contact-item span {
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+.contact-item a {
+  color: white;
+  text-decoration: none;
+}
+
+.contact-item button {
+  margin-left: 10px;
+  font-size: 0.7rem;
+  cursor: pointer;
+}

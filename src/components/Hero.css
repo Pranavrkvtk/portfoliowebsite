@@ -144,13 +144,15 @@ h1 {
 .t-prompt { color: #6366f1; }
 .t-text   { color: #e2e8f0; }
 
+/* Smaller + smoother cursor */
 .t-cursor {
   display: inline-block;
-  width: 8px;
-  height: 14px;
+  width: 5px;        /* 🔥 reduced from 8px */
+  height: 12px;      /* 🔥 reduced from 14px */
   background: #6366f1;
   vertical-align: middle;
-  animation: blink 1s step-start infinite;
+  animation: blink 1.2s step-start infinite; /* 🔥 slower blink */
+  border-radius: 1px; /* optional smooth edge */
 }
 
 /* Description */
@@ -598,4 +600,57 @@ h1 {
     text-align: center;
     border-radius: 5px;
   }
+}
+
+/* New cube colors */
+.cube-d .face {
+  background: rgba(34, 197, 94, 0.1);
+  border-color: rgba(34, 197, 94, 0.4);
+}
+
+.cube-e .face {
+  background: rgba(251, 191, 36, 0.1);
+  border-color: rgba(251, 191, 36, 0.4);
+}
+
+.cube-f .face {
+  background: rgba(168, 85, 247, 0.1);
+  border-color: rgba(168, 85, 247, 0.4);
+}
+
+/* Positions + animations */
+.cube-d {
+  top: 120px;
+  right: 10px;
+  animation: cubeSpin 9s linear infinite;
+  transform: scale(0.6);
+}
+
+.cube-e {
+  bottom: 20px;
+  right: 120px;
+  animation: cubeSpin 11s linear infinite reverse;
+  transform: scale(0.8);
+}
+
+.cube-f {
+  top: 180px;
+  right: 40px;
+  animation: cubeSpin 15s linear infinite;
+  transform: scale(0.5);
+}
+.cube {
+  animation: cubeSpin 10s linear infinite, cubeFloat 4s ease-in-out infinite;
+}
+
+@keyframes cubeFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.t-cursor {
+  width: 3px;
+  height: 12px;
+  background: #6366f1;
+  animation: blink 1.4s step-start infinite;
 }
