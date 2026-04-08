@@ -311,8 +311,8 @@ h1 {
 
 /* ── 3D flip card ── */
 .card-3d {
-  width: 220px;
-  height: 260px;
+  width: 200px;
+  height: 240px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -384,7 +384,7 @@ h1 {
 }
 
 .card-name {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
   color: #fff;
   text-align: center;
@@ -540,8 +540,8 @@ h1 {
 
 /* HEX CONTAINER */
 .avatar-hex {
-  width: 90px;
-  height: 90px;
+  width: 75px;
+  height: 75px;
 
   border-radius: 50%; /* 🔥 makes it round */
   overflow: hidden;
@@ -583,18 +583,19 @@ h1 {
 @media (max-width: 480px) {
   .btns {
     display: flex;
-    flex-direction: row;   /* 🔥 keep in one row */
-    flex-wrap: nowrap;     /* ❗ prevent wrapping */
-    gap: 8px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 6px;          /* reduced gap */
     width: 100%;
   }
 
   .btn-p,
   .btn-g,
   .btn-r {
-    flex: 1;               /* equal width */
-    padding: 10px;
-    font-size: 12px;
+    flex: 1;
+    padding: 8px;      /* 🔥 reduced from 10px */
+    font-size: 11px;   /* 🔥 reduced text */
     text-align: center;
+    border-radius: 5px;
   }
 }

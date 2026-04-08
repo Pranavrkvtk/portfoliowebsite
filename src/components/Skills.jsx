@@ -4,80 +4,79 @@ import AccountTreeIcon from "@mui/icons-material/AccountTree";
 
 function Skills() {
   const skills = [
-    { name: "Java",         img: "/javaimg.jpeg",       color: "#f89820", level: 90 },
-    { name: "Spring Boot",  img: "/springbootimg.png",  color: "#6db33f", level: 88 },
-    { name: "Microservices",icon: <AccountTreeIcon style={{ fontSize: 36, color: "#00acc1" }} />, color: "#00acc1", level: 85 },
-    { name: "React",        img: "/reactimg.png",       color: "#61dafb", level: 92 },
-    { name: "Redux",        img: "/reduximg.png",       color: "#764abc", level: 86 },
-    { name: "PostgreSQL",   img: "/qqq.png",            color: "#336791", level: 84 },
-    { name: "JWT",          img: "/jwtimg.png",         color: "#ff6b35", level: 88 },
-    { name: "OAuth2",       img: "/oAuth2img.png",      color: "#e67e22", level: 87 },
-    { name: "Docker",       img: "/dockerimg.png",      color: "#2496ed", level: 82 },
-    { name: "Kubernetes",   img: "/kubernatesimg.png",  color: "#326ce5", level: 78 },
+    { name: "Java", img: "/javaimg.jpeg", color: "#f89820", level: 90 },
+    { name: "Spring Boot", img: "/springbootimg.png", color: "#6db33f", level: 88 },
+    { name: "Microservices", icon: <AccountTreeIcon />, color: "#00acc1", level: 85 },
+    { name: "React", img: "/reactimg.png", color: "#61dafb", level: 92 },
+    { name: "Redux", img: "/reduximg.png", color: "#764abc", level: 86 },
+    { name: "PostgreSQL", img: "/qqq.png", color: "#336791", level: 84 },
+    { name: "JWT", img: "/jwtimg.png", color: "#ff6b35", level: 88 },
+    { name: "OAuth2", img: "/oAuth2img.png", color: "#e67e22", level: 87 },
+    { name: "Docker", img: "/dockerimg.png", color: "#2496ed", level: 82 },
+    { name: "Kubernetes", img: "/kubernatesimg.png", color: "#326ce5", level: 78 },
   ];
 
   const [activeSkill, setActiveSkill] = useState(null);
 
   return (
-    <section className="skills-simple" id="skills">
-      <div className="skills-simple-container">
+    <section className="skills" id="skills">
+      <div className="skills-container">
 
         {/* HEADER */}
-        <div className="skills-simple-header">
-          <span className="skills-simple-badge">My Skills</span>
-          <h2 className="skills-simple-title">
-            What I <span className="highlight">Bring</span> to the Table
+        <div className="skills-header">
+          <span className="skills-badge">My Skills</span>
+          <h2 className="skills-title">
+            What I <span>Bring</span>
           </h2>
-          <p className="skills-simple-subtitle">
+          <p className="skills-subtitle">
             Technologies and tools I specialize in
           </p>
         </div>
 
-        {/* SKILLS GRID */}
-        <div className="skills-simple-grid">
+        {/* GRID */}
+        <div className="skills-grid">
           {skills.map((skill, index) => (
             <div
               key={index}
-              className={`skill-simple-card ${activeSkill === index ? "active" : ""}`}
+              className="skill-card"
               onMouseEnter={() => setActiveSkill(index)}
               onMouseLeave={() => setActiveSkill(null)}
             >
-              {/* ICON — image or MUI icon */}
               <div
-                className="skill-simple-icon"
-                style={{ background: `${skill.color}18` }}
+                className="skill-icon"
+                style={{ background: `${skill.color}20` }}
               >
                 {skill.icon ? (
-                  <span className="skill-mui-icon">{skill.icon}</span>
+                  <span className="mui-icon">{skill.icon}</span>
                 ) : (
                   <img src={skill.img} alt={skill.name} />
                 )}
               </div>
 
-              {/* INFO */}
-              <div className="skill-simple-info">
-                <h3 className="skill-simple-name">{skill.name}</h3>
+              <div className="skill-info">
+                <h3>{skill.name}</h3>
 
-                <div className="skill-simple-bar">
+                <div className="skill-bar">
                   <div
-                    className="skill-simple-fill"
+                    className="skill-fill"
                     style={{
                       width: activeSkill === index ? `${skill.level}%` : "0%",
-                      backgroundColor: skill.color,
+                      background: skill.color,
                     }}
                   />
                 </div>
 
-                <span className="skill-simple-percent">{skill.level}%</span>
+                <span className="skill-percent">{skill.level}%</span>
               </div>
             </div>
           ))}
         </div>
 
         {/* FOOTER */}
-        <div className="skills-simple-footer">
+        <div className="skills-footer">
           <p>✨ Always learning and exploring new technologies</p>
         </div>
+
       </div>
     </section>
   );
