@@ -216,3 +216,32 @@
   transform: scale(1.05);
   box-shadow: 0 5px 15px rgba(56, 189, 248, 0.4);
 }
+
+/* Badge */
+.project-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  font-size: 0.7rem;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+/* Company badge */
+.project-badge.company {
+  background: rgba(99, 102, 241, 0.2);
+  color: #6366f1;
+}
+
+/* Freelance badge */
+.project-badge.freelance {
+  background: rgba(34, 197, 94, 0.2);
+  color: #22c55e;
+}
+
+/* Company name */
+.project-company {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  margin-bottom: 8px;
+}

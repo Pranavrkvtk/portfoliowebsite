@@ -4,25 +4,25 @@ const TIMELINE = [
   {
     year: "2013 – 2015",
     title: "SSLC",
-    place: "BEM HS Vadakara · 63%",
+    place: "BEM HS Vadakara ",
     icon: "📚",
   },
   {
     year: "2015 – 2017",
     title: "Biology Science",
-    place: "KR HSS Puranmeri · 65%",
+    place: "KR HSS Puranmeri ",
     icon: "🧬",
   },
   {
     year: "2017 – 2020",
     title: "BSc Physics",
-    place: "SNDP College · 53.9%",
+    place: "SNDP College ",
     icon: "🔬",
   },
   {
     year: "2021 – 2023",
     title: "MCA",
-    place: "College of Engineering Vadakara · CGPA 7.05",
+    place: "College of Engineering Vadakara ",
     icon: "🎓",
   },
   {

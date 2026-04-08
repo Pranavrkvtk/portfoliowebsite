@@ -1,4 +1,6 @@
 import "./About.css";
+import { useEffect, useState } from "react";
+
 // import Journey from "./Jorney";
 
 const SKILLS = [
@@ -24,14 +26,46 @@ const SKILLS = [
   },
 ];
 
+/* 🔥 Updated STATS (numbers only) */
 const STATS = [
-  { num: "2+", label: "Years Experience" },
-  { num: "10+", label: "Projects" },
-  { num: "8+", label: "Technologies" },
-  { num: "100%", label: "Dedication" },
+  { num: 2, label: "Years Experience", suffix: "+" },
+  { num: 10, label: "Projects", suffix: "+" },
+  { num: 8, label: "Technologies", suffix: "+" },
+  { num: 100, label: "Dedication", suffix: "%" },
 ];
 
 const TAGS = ["Spring Boot", "React", "Docker", "AWS", "PostgreSQL", "Kafka"];
+
+/* 🔥 Counter Component */
+function Counter({ end, suffix }) {
+  const [count, setCount] = useState(1);
+
+  useEffect(() => {
+    let start = 1;
+    const duration = 1500;
+    const increment = end / (duration / 30);
+
+    const timer = setInterval(() => {
+      start += increment;
+
+      if (start >= end) {
+        setCount(end);
+        clearInterval(timer);
+      } else {
+        setCount(Math.floor(start));
+      }
+    }, 30);
+
+    return () => clearInterval(timer);
+  }, [end]);
+
+  return (
+    <>
+      {count}
+      {suffix}
+    </>
+  );
+}
 
 function SkillCard({ icon, title, tags }) {
   return (
@@ -53,7 +87,6 @@ function SkillCard({ icon, title, tags }) {
 export default function About() {
   return (
     <>
-      {/* ===== ABOUT SECTION ===== */}
       <section className="about" id="about">
         <div className="ab-inner">
 
@@ -67,7 +100,7 @@ export default function About() {
             — Java & React Developer from Kerala, India
           </p>
 
-          {/* ===== TOP SECTION ===== */}
+          {/* TOP SECTION */}
           <div className="ab-top">
 
             {/* BIO */}
@@ -75,15 +108,16 @@ export default function About() {
               <p className="bio-text">
                 I'm a <strong>Java & React Developer</strong> with strong backend
                 experience in <strong>Spring Boot</strong> and modern frontend
-                skills using <strong>React & Next.js</strong>. I build scalable
-                applications with clean architecture and user-friendly UI.
+                skills using <strong>React & Next.js</strong>.
               </p>
 
-              {/* STATS */}
+              {/* 🔥 Animated STATS */}
               <div className="bio-stats">
                 {STATS.map((item) => (
                   <div key={item.label} className="bs">
-                    <div className="bs-num">{item.num}</div>
+                    <div className="bs-num">
+                      <Counter end={item.num} suffix={item.suffix} />
+                    </div>
                     <div className="bs-label">{item.label}</div>
                   </div>
                 ))}
@@ -119,7 +153,7 @@ export default function About() {
 
           </div>
 
-          {/* ===== SKILLS ===== */}
+          {/* SKILLS */}
           <div className="skills-grid">
             {SKILLS.map((skill) => (
               <SkillCard key={skill.title} {...skill} />
@@ -128,9 +162,6 @@ export default function About() {
 
         </div>
       </section>
-
-      {/* ===== JOURNEY SECTION ===== */}
-      {/* <Journey /> */}
     </>
   );
 }
