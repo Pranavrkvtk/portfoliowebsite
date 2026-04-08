@@ -28,13 +28,13 @@ const TIMELINE = [
   {
     year: "2024 – 2025",
     title: "Java Backend Developer",
-    place: "Spring Boot · Microservices",
+    place: "GJ Global IT Ventures Pvt Ltd",
     icon: "☕",
   },
   {
     year: "2025 – Present",
     title: "React Developer",
-    place: "React · Next.js · TypeScript",
+    place: "GJ Global IT Ventures Pvt Ltd",
     icon: "⚛",
   },
 ];
