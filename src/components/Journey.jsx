@@ -4,25 +4,25 @@ const TIMELINE = [
   {
     year: "2013 – 2015",
     title: "SSLC",
-    place: "BEM HS Vadakara ",
+    place: "BEM HS Vadakara",
     icon: "📚",
   },
   {
     year: "2015 – 2017",
     title: "Biology Science",
-    place: "KR HSS Puranmeri ",
+    place: "KR HSS Puranmeri",
     icon: "🧬",
   },
   {
     year: "2017 – 2020",
     title: "BSc Physics",
-    place: "SNDP College ",
+    place: "RSM SNDP College Koyilandy",
     icon: "🔬",
   },
   {
     year: "2021 – 2023",
     title: "MCA",
-    place: "College of Engineering Vadakara ",
+    place: "College of Engineering Vadakara",
     icon: "🎓",
   },
   {
