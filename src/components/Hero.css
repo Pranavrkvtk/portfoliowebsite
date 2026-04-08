@@ -1,3 +1,4 @@
+/* Hero.css */
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;800&family=Fira+Code:wght@400;500&display=swap');
 
 /* ─── Reset & Root ─────────────────────────────────────────── */
@@ -144,15 +145,15 @@ h1 {
 .t-prompt { color: #6366f1; }
 .t-text   { color: #e2e8f0; }
 
-/* Smaller + smoother cursor */
+/* Smaller + slower cursor */
 .t-cursor {
   display: inline-block;
-  width: 5px;        /* 🔥 reduced from 8px */
-  height: 12px;      /* 🔥 reduced from 14px */
+  width: 5px;
+  height: 12px;
   background: #6366f1;
   vertical-align: middle;
-  animation: blink 1.2s step-start infinite; /* 🔥 slower blink */
-  border-radius: 1px; /* optional smooth edge */
+  animation: blink 1.4s step-start infinite;
+  border-radius: 1px;
 }
 
 /* Description */
@@ -204,7 +205,7 @@ h1 {
   cursor: pointer;
   text-decoration: none;
   display: inline-block;
-  transition: transform 0.2s, background 0.2s, border-color 0.2s, color 0.2s;
+  transition: transform 0.3s ease-out, background 0.3s ease-out, border-color 0.3s ease-out, color 0.3s ease-out;
 }
 
 .btn-p {
@@ -220,12 +221,12 @@ h1 {
 }
 .btn-p:hover {
   background: #4f46e5;
-  transform: translateY(-2px);
+  transform: translateY(-3px);
 }
 
 .btn-r:hover {
   background: #4f46e5;
-  transform: translateY(-2px);
+  transform: translateY(-3px);
 }
 
 
@@ -238,7 +239,7 @@ h1 {
 .btn-g:hover {
   border-color: #6366f1;
   color: #a5b4fc;
-  transform: translateY(-2px);
+  transform: translateY(-3px);
 }
 
 /* ─── Right Column ──────────────────────────────────────────── */
@@ -258,7 +259,7 @@ h1 {
   position: relative;
 }
 
-/* ── Orbiting rings ── */
+/* ── Orbiting rings (slower) ── */
 .orbit,
 .orbit2 {
   position: absolute;
@@ -273,7 +274,7 @@ h1 {
   height: 280px;
   margin: -140px;
   border-color: rgba(99, 102, 241, 0.25);
-  animation: orbitSpin 20s linear infinite;
+  animation: orbitSpin 40s linear infinite;
 }
 
 .orbit2 {
@@ -281,7 +282,7 @@ h1 {
   height: 200px;
   margin: -100px;
   border-color: rgba(236, 72, 153, 0.2);
-  animation: orbitSpin 14s linear infinite reverse;
+  animation: orbitSpin 30s linear infinite reverse;
 }
 
 .orbit-dot {
@@ -311,7 +312,7 @@ h1 {
   to { transform: rotate(360deg); }
 }
 
-/* ── 3D flip card ── */
+/* ── 3D flip card (slower float) ── */
 .card-3d {
   width: 200px;
   height: 240px;
@@ -320,8 +321,8 @@ h1 {
   left: 50%;
   transform: translate(-50%, -50%) rotateY(-18deg) rotateX(12deg);
   transform-style: preserve-3d;
-  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-  animation: cardFloat 6s ease-in-out infinite;
+  transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: cardFloat 10s ease-in-out infinite;
 }
 
 .card-3d.is-flipped {
@@ -377,12 +378,12 @@ h1 {
   font-weight: 800;
   color: #fff;
   letter-spacing: -1px;
-  animation: hexPulse 3s ease-in-out infinite;
+  animation: hexPulse 4s ease-in-out infinite;
 }
 
 @keyframes hexPulse {
   0%, 100% { filter: brightness(1); }
-  50%       { filter: brightness(1.35); }
+  50%       { filter: brightness(1.3); }
 }
 
 .card-name {
@@ -406,7 +407,7 @@ h1 {
   background: rgba(99, 102, 241, 0.4);
 }
 
-/* Skill bars */
+/* Skill bars (slower fill) */
 .skill-row {
   width: 100%;
   display: flex;
@@ -436,14 +437,14 @@ h1 {
 .skill-fill {
   height: 100%;
   border-radius: 2px;
-  animation: fillIn 1.4s ease forwards;
+  animation: fillIn 2s ease forwards;
 }
 
 @keyframes fillIn {
   from { width: 0%; }
 }
 
-/* ── Spinning cubes ── */
+/* ── Spinning cubes (slower, with float) ── */
 .cube-cluster {
   position: absolute;
 }
@@ -453,6 +454,7 @@ h1 {
   height: 40px;
   transform-style: preserve-3d;
   position: absolute;
+  animation: cubeSpin 15s linear infinite, cubeFloat 6s ease-in-out infinite;
 }
 
 .face {
@@ -473,15 +475,20 @@ h1 {
 .cube-b .face { background: rgba(236, 72, 153, 0.1);  border-color: rgba(236, 72, 153, 0.4); }
 .cube-c .face { background: rgba(6, 182, 212, 0.1);   border-color: rgba(6, 182, 212, 0.4); }
 
-.cube-a { top: 10px;  right: 20px; animation: cubeSpin 10s linear infinite; }
-.cube-b { bottom: 40px; right: 60px; animation: cubeSpin 7s linear infinite reverse; }
-.cube-c { top: 60px;  right: 80px; animation: cubeSpin 13s linear infinite; transform: scale(0.7); }
+.cube-a { top: 10px;  right: 20px; }
+.cube-b { bottom: 40px; right: 60px; }
+.cube-c { top: 60px;  right: 80px; transform: scale(0.7); }
 
 @keyframes cubeSpin {
   to { transform: rotateX(360deg) rotateY(360deg); }
 }
 
-/* ─── Scroll Hint ───────────────────────────────────────────── */
+@keyframes cubeFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+/* ─── Scroll Hint (slower) ───────────────────────────────────────────── */
 .scroll-hint {
   position: absolute;
   bottom: 24px;
@@ -502,12 +509,12 @@ h1 {
   border-right: 1px solid #475569;
   border-bottom: 1px solid #475569;
   transform: rotate(45deg);
-  animation: arrowBounce 1.5s ease-in-out infinite;
+  animation: arrowBounce 2.5s ease-in-out infinite;
 }
 
 @keyframes arrowBounce {
-  0%, 100% { transform: rotate(45deg) translate(0, 0);   opacity: 0.5; }
-  50%       { transform: rotate(45deg) translate(3px, 3px); opacity: 1;   }
+  0%, 100% { transform: rotate(45deg) translate(0, 0);   opacity: 0.4; }
+  50%       { transform: rotate(45deg) translate(4px, 4px); opacity: 1;   }
 }
 
 /* ─── Responsive ────────────────────────────────────────────── */
@@ -533,29 +540,36 @@ h1 {
 }
 
 @media (max-width: 480px) {
-  .left { padding: 40px 20px 20px; }
-  h1 { font-size: 28px; }
-  .stats { gap: 16px; }
-  .scene3d { width: 260px; height: 300px; }
-  .card-3d { width: 180px; height: 220px; }
+  .btns {
+    display: flex;
+    flex-direction: column;   /* ✅ stack buttons */
+    gap: 10px;
+    width: 100%;
+  }
+
+  .btn-p,
+  .btn-g,
+  .btn-r {
+    width: 100%;             /* ✅ full width */
+    padding: 12px;
+    font-size: 13px;
+    text-align: center;
+    border-radius: 6px;
+  }
 }
 
 /* HEX CONTAINER */
 .avatar-hex {
   width: 75px;
   height: 75px;
-
-  border-radius: 50%; /* 🔥 makes it round */
+  border-radius: 50%;
   overflow: hidden;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   background: linear-gradient(135deg, #4f46e5, #7c3aed);
   box-shadow: 0 0 20px rgba(124, 58, 237, 0.6);
-
-  animation: hexPulse 3s ease-in-out infinite;
+  animation: hexPulse 4s ease-in-out infinite;
 }
 
 /* IMAGE STYLE */
@@ -563,43 +577,12 @@ h1 {
   width: 100%;
   height: 100%;
   object-fit: cover;
-
-  /* smooth look */
-  transition: transform 0.4s ease;
+  transition: transform 0.5s ease;
 }
 
-/* HOVER EFFECT 🔥 */
+/* HOVER EFFECT */
 .avatar-hex:hover img {
   transform: scale(1.1);
-}
-
-/* OPTIONAL ANIMATION */
-@keyframes hexPulse {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-}
-@media (max-width: 480px) {
-  .btns {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    gap: 6px;          /* reduced gap */
-    width: 100%;
-  }
-
-  .btn-p,
-  .btn-g,
-  .btn-r {
-    flex: 1;
-    padding: 8px;      /* 🔥 reduced from 10px */
-    font-size: 11px;   /* 🔥 reduced text */
-    text-align: center;
-    border-radius: 5px;
-  }
 }
 
 /* New cube colors */
@@ -622,35 +605,20 @@ h1 {
 .cube-d {
   top: 120px;
   right: 10px;
-  animation: cubeSpin 9s linear infinite;
+  animation: cubeSpin 18s linear infinite, cubeFloat 7s ease-in-out infinite;
   transform: scale(0.6);
 }
 
 .cube-e {
   bottom: 20px;
   right: 120px;
-  animation: cubeSpin 11s linear infinite reverse;
+  animation: cubeSpin 22s linear infinite reverse, cubeFloat 8s ease-in-out infinite;
   transform: scale(0.8);
 }
 
 .cube-f {
   top: 180px;
   right: 40px;
-  animation: cubeSpin 15s linear infinite;
+  animation: cubeSpin 25s linear infinite, cubeFloat 9s ease-in-out infinite;
   transform: scale(0.5);
-}
-.cube {
-  animation: cubeSpin 10s linear infinite, cubeFloat 4s ease-in-out infinite;
-}
-
-@keyframes cubeFloat {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-}
-
-.t-cursor {
-  width: 3px;
-  height: 12px;
-  background: #6366f1;
-  animation: blink 1.4s step-start infinite;
 }
