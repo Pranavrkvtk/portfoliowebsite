@@ -1,7 +1,5 @@
 import "./About.css";
-import { useEffect, useState } from "react";
-
-// import Journey from "./Jorney";
+import { useEffect, useState, useRef } from "react";
 
 const SKILLS = [
   {
@@ -26,7 +24,6 @@ const SKILLS = [
   },
 ];
 
-/* 🔥 Updated STATS (numbers only) */
 const STATS = [
   { num: 2, label: "Years Experience", suffix: "+" },
   { num: 10, label: "Projects", suffix: "+" },
@@ -36,7 +33,7 @@ const STATS = [
 
 const TAGS = ["Spring Boot", "React", "Docker", "AWS", "PostgreSQL", "Kafka"];
 
-/* 🔥 Counter Component */
+/* Counter */
 function Counter({ end, suffix }) {
   const [count, setCount] = useState(1);
 
@@ -85,83 +82,123 @@ function SkillCard({ icon, title, tags }) {
 }
 
 export default function About() {
+  const audioRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const toggleVoice = async () => {
+    if (!audioRef.current) return;
+
+    try {
+      if (isPlaying) {
+        audioRef.current.pause();
+      } else {
+        await audioRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    } catch (err) {
+      console.error("Audio error:", err);
+      alert("Audio not found. Check voice.mp3 in public folder.");
+    }
+  };
+
+  // Reset button when audio ends
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const handleEnd = () => setIsPlaying(false);
+
+    audio.addEventListener("ended", handleEnd);
+
+    return () => {
+      audio.removeEventListener("ended", handleEnd);
+    };
+  }, []);
+
   return (
-    <>
-      <section className="about" id="about">
-        <div className="ab-inner">
+    <section className="about" id="about">
+      <div className="ab-inner">
 
-          {/* TITLE */}
-          <h2 className="ab-title">
-            Crafting <span className="grad">digital experiences</span>
-            <br /> from backend to frontend
-          </h2>
+        {/* ✅ FIXED AUDIO */}
+        <audio ref={audioRef}>
+          <source src="/voice.mp3" type="audio/mpeg" />
+          Your browser does not support audio
+        </audio>
 
-          <p className="ab-sub">
-            — Java & React Developer from Kerala, India
-          </p>
+        {/* TITLE */}
+        <h2 className="ab-title">
+          Crafting <span className="grad">digital experiences</span>
+          <br /> from backend to frontend
+        </h2>
 
-          {/* TOP SECTION */}
-          <div className="ab-top">
+        <p className="ab-sub">
+          — Java & React Developer from Kerala, India
+        </p>
 
-            {/* BIO */}
-            <div className="bio-card">
-              <p className="bio-text">
-                I'm a <strong>Java & React Developer</strong> with strong backend
-                experience in <strong>Spring Boot</strong> and modern frontend
-                skills using <strong>React & Next.js</strong>.
-              </p>
+        {/* 🔊 BUTTON */}
+        <button className="voice-btn" onClick={toggleVoice}>
+          {isPlaying ? "⏸ Pause Intro" : "🔊 Play Intro"}
+        </button>
 
-              {/* 🔥 Animated STATS */}
-              <div className="bio-stats">
-                {STATS.map((item) => (
-                  <div key={item.label} className="bs">
-                    <div className="bs-num">
-                      <Counter end={item.num} suffix={item.suffix} />
-                    </div>
-                    <div className="bs-label">{item.label}</div>
+        {/* TOP SECTION */}
+        <div className="ab-top">
+
+          <div className="bio-card">
+            <p className="bio-text">
+              I'm a <strong>Java & React Developer</strong> with strong backend
+              experience in <strong>Spring Boot</strong> and modern frontend
+              skills using <strong>React & Next.js</strong>.
+            </p>
+
+            <div className="bio-stats">
+              {STATS.map((item) => (
+                <div key={item.label} className="bs">
+                  <div className="bs-num">
+                    <Counter end={item.num} suffix={item.suffix} />
                   </div>
+                  <div className="bs-label">{item.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* ID CARD */}
+          <div className="id-card">
+            <div>
+              <div className="id-avatar">
+                <img src="/img1.JPG" alt="Pranav" />
+              </div>
+
+              <div className="id-name">Pranav R K</div>
+              <div className="id-role">
+                JAVA · REACT · FULL STACK
+              </div>
+
+              <div className="id-tags">
+                {TAGS.map((tag) => (
+                  <span key={tag} className="id-tag">
+                    {tag}
+                  </span>
                 ))}
               </div>
             </div>
 
-            {/* ID CARD */}
-            <div className="id-card">
-              <div>
-                <div className="id-avatar">
-                  <img src="/img1.JPG" alt="Pranav" />
-                </div>
-
-                <div className="id-name">Pranav R K</div>
-                <div className="id-role">
-                  JAVA · REACT · FULL STACK
-                </div>
-
-                <div className="id-tags">
-                  {TAGS.map((tag) => (
-                    <span key={tag} className="id-tag">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <div className="location-row">
-                <div className="loc-dot" />
-                <span>Kerala, India · Open to Work</span>
-              </div>
+            <div className="location-row">
+              <div className="loc-dot" />
+              <span>Kerala, India · Open to Work</span>
             </div>
-
-          </div>
-
-          {/* SKILLS */}
-          <div className="skills-grid">
-            {SKILLS.map((skill) => (
-              <SkillCard key={skill.title} {...skill} />
-            ))}
           </div>
 
         </div>
-      </section>
-    </>
+
+        {/* SKILLS */}
+        <div className="skills-grid">
+          {SKILLS.map((skill) => (
+            <SkillCard key={skill.title} {...skill} />
+          ))}
+        </div>
+
+      </div>
+    </section>
   );
 }
