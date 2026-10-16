@@ -32,10 +32,16 @@ const TIMELINE = [
     icon: "☕",
   },
   {
-    year: "2025 – Present",
+    year: "2025 – 2026",
     title: "React Developer",
     place: "GJ Global IT Ventures Pvt Ltd",
     icon: "⚛",
+  },
+  {
+    year: "Aug 2026 – Present",
+    title: "Cyber Security",
+    place: "Applet Logic Pvt Ltd",
+    icon: "🔐",
   },
 ];
 
