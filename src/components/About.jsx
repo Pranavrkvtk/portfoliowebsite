@@ -1,203 +1,173 @@
 import "./About.css";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const SKILLS = [
-  {
-    icon: "☕",
-    title: "Java & Spring Boot",
-    tags: ["Java", "Spring Boot", "Hibernate", "JPA"],
-  },
-  {
-    icon: "⚛",
-    title: "React & Frontend",
-    tags: ["React", "Next.js", "TypeScript", "Tailwind"],
-  },
-  {
-    icon: "⬡",
-    title: "Microservices",
-    tags: ["Docker", "Kubernetes", "Kafka", "REST API"],
-  },
-  {
-    icon: "▦",
-    title: "Database & Tools",
-    tags: ["PostgreSQL", "MySQL", "Redis", "Git"],
-  },
+  { icon: "☕", title: "Java & Spring Boot", hue: "violet", tags: ["Java", "Spring Boot", "Hibernate", "JPA"] },
+  { icon: "⚛", title: "React & Frontend", hue: "cyan", tags: ["React", "Next.js", "TypeScript", "Tailwind"] },
+  { icon: "⬡", title: "Microservices", hue: "pink", tags: ["Docker", "Kubernetes", "Kafka", "REST API"] },
+  { icon: "▦", title: "Database & Tools", hue: "lemon", tags: ["PostgreSQL", "MySQL", "Redis", "Git"] },
 ];
 
 const STATS = [
-  { num: 2, label: "Years Experience", suffix: "+" },
-  { num: 10, label: "Projects", suffix: "+" },
+  { num: 2, label: "Years experience", suffix: "+" },
+  { num: 10, label: "Projects shipped", suffix: "+" },
   { num: 8, label: "Technologies", suffix: "+" },
-  { num: 100, label: "Dedication", suffix: "%" },
 ];
 
-const TAGS = ["Spring Boot", "React", "Docker", "AWS", "PostgreSQL", "Kafka"];
+const MARQUEE = [
+  "Java", "Spring Boot", "React", "Next.js", "TypeScript", "Docker",
+  "Kubernetes", "Kafka", "PostgreSQL", "Redis", "AWS", "Tailwind",
+];
 
-/* Counter */
 function Counter({ end, suffix }) {
-  const [count, setCount] = useState(1);
-
+  const [count, setCount] = useState(0);
   useEffect(() => {
-    let start = 1;
-    const duration = 1500;
-    const increment = end / (duration / 30);
-
+    let current = 0;
+    const step = Math.max(end / 50, 0.2);
     const timer = setInterval(() => {
-      start += increment;
-
-      if (start >= end) {
+      current += step;
+      if (current >= end) {
         setCount(end);
         clearInterval(timer);
-      } else {
-        setCount(Math.floor(start));
-      }
+      } else setCount(Math.floor(current));
     }, 30);
-
     return () => clearInterval(timer);
   }, [end]);
-
-  return (
-    <>
-      {count}
-      {suffix}
-    </>
-  );
+  return <>{count}{suffix}</>;
 }
 
-function SkillCard({ icon, title, tags }) {
+function SkillCard({ icon, title, tags, hue }) {
+  const onMove = (e) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    e.currentTarget.style.setProperty("--mx", `${e.clientX - r.left}px`);
+    e.currentTarget.style.setProperty("--my", `${e.clientY - r.top}px`);
+  };
   return (
-    <div className="sk-card">
-      <div className="sk-icon">{icon}</div>
-      <div className="sk-title">{title}</div>
-
-      <div className="sk-tags">
-        {tags.map((tag) => (
-          <span key={tag} className="sk-tag">
-            {tag}
-          </span>
-        ))}
-      </div>
-    </div>
+    <article className={`ab3-card ab3-card--${hue}`} onMouseMove={onMove}>
+      <div className="ab3-card-icon">{icon}</div>
+      <h3>{title}</h3>
+      <ul>
+        {tags.map((t) => <li key={t}>{t}</li>)}
+      </ul>
+    </article>
   );
 }
 
 export default function About() {
   const audioRef = useRef(null);
+  const photoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
   const toggleVoice = async () => {
-    if (!audioRef.current) return;
-
+    const audio = audioRef.current;
+    if (!audio) return;
     try {
       if (isPlaying) {
-        audioRef.current.pause();
+        audio.pause();
+        setIsPlaying(false);
       } else {
-        await audioRef.current.play();
+        await audio.play();
+        setIsPlaying(true);
       }
-      setIsPlaying(!isPlaying);
     } catch (err) {
       console.error("Audio error:", err);
-      alert("Audio not found. Check voice.mp3 in public folder.");
+      alert("Audio not found. Check voice.mp3 in the public folder.");
     }
   };
 
-  // Reset button when audio ends
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
-
-    const handleEnd = () => setIsPlaying(false);
-
-    audio.addEventListener("ended", handleEnd);
-
-    return () => {
-      audio.removeEventListener("ended", handleEnd);
-    };
+    const end = () => setIsPlaying(false);
+    audio.addEventListener("ended", end);
+    return () => audio.removeEventListener("ended", end);
   }, []);
 
+  /* 3D tilt on the photo card */
+  const onTilt = (e) => {
+    const el = photoRef.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - 0.5;
+    const y = (e.clientY - r.top) / r.height - 0.5;
+    el.style.transform = `perspective(900px) rotateY(${x * 14}deg) rotateX(${-y * 14}deg)`;
+  };
+  const resetTilt = () => {
+    if (photoRef.current) photoRef.current.style.transform = "";
+  };
+
   return (
-    <section className="about" id="about">
-      <div className="ab-inner">
+    <section className="ab3" id="about">
+      <audio ref={audioRef}>
+        <source src="/voice.mp3" type="audio/mpeg" />
+      </audio>
 
-        {/* ✅ FIXED AUDIO */}
-        <audio ref={audioRef}>
-          <source src="/voice.mp3" type="audio/mpeg" />
-          Your browser does not support audio
-        </audio>
+      <div className="ab3-aurora" aria-hidden="true">
+        <span /><span /><span />
+      </div>
 
-        {/* TITLE */}
-        <h2 className="ab-title">
-          Crafting <span className="grad">digital experiences</span>
-          <br /> from backend to frontend
-        </h2>
-
-        <p className="ab-sub">
-          — Java & React Developer from Kerala, India
-        </p>
-
-        {/* 🔊 BUTTON */}
-        <button className="voice-btn" onClick={toggleVoice}>
-          {isPlaying ? "⏸ Pause Intro" : "🔊 Play Intro"}
-        </button>
-
-        {/* TOP SECTION */}
-        <div className="ab-top">
-
-          <div className="bio-card">
-            <p className="bio-text">
-              I'm a <strong>Java & React Developer</strong> with strong backend
-              experience in <strong>Spring Boot</strong> and modern frontend
-              skills using <strong>React & Next.js</strong>.
+      <div className="ab3-wrap">
+        <div className="ab3-hero">
+          <div className="ab3-copy">
+            <p className="ab3-status">
+              <i /> Open to work · Kerala, India
             </p>
 
-            <div className="bio-stats">
-              {STATS.map((item) => (
-                <div key={item.label} className="bs">
-                  <div className="bs-num">
-                    <Counter end={item.num} suffix={item.suffix} />
-                  </div>
-                  <div className="bs-label">{item.label}</div>
+            <h2 className="ab3-title">
+              I build things
+              <br />
+              <span>backend to frontend.</span>
+            </h2>
+
+            <p className="ab3-bio">
+              Hi, I'm <b>Pranav</b>, a Java and React developer. I design
+              Spring Boot services that scale, then wrap them in fast,
+              polished interfaces with React and Next.js.
+            </p>
+
+            <div className="ab3-actions">
+              <button type="button" className="ab3-play" onClick={toggleVoice} aria-pressed={isPlaying}>
+                <span className={`ab3-wave ${isPlaying ? "is-on" : ""}`} aria-hidden="true">
+                  <i /><i /><i /><i />
+                </span>
+                {isPlaying ? "Pause intro" : "Play intro"}
+              </button>
+              <a href="#contact" className="ab3-ghost">Let's talk</a>
+            </div>
+
+            <dl className="ab3-stats">
+              {STATS.map((s) => (
+                <div key={s.label}>
+                  <dd><Counter end={s.num} suffix={s.suffix} /></dd>
+                  <dt>{s.label}</dt>
                 </div>
               ))}
-            </div>
+            </dl>
           </div>
 
-          {/* ID CARD */}
-          <div className="id-card">
-            <div>
-              <div className="id-avatar">
-                <img src="/img1.JPG" alt="Pranav" />
-              </div>
-
-              <div className="id-name">Pranav R K</div>
-              <div className="id-role">
-                JAVA · REACT · FULL STACK
-              </div>
-
-              <div className="id-tags">
-                {TAGS.map((tag) => (
-                  <span key={tag} className="id-tag">
-                    {tag}
-                  </span>
-                ))}
+          <div className="ab3-visual" onMouseMove={onTilt} onMouseLeave={resetTilt}>
+            <div className="ab3-photo" ref={photoRef}>
+              <img src="/img1.JPG" alt="Pranav R K" />
+              <div className="ab3-name">
+                <strong>Pranav R K</strong>
+                <span>Full stack developer</span>
               </div>
             </div>
-
-            <div className="location-row">
-              <div className="loc-dot" />
-              <span>Kerala, India · Open to Work</span>
-            </div>
+            <span className="ab3-float ab3-float--a">☕ Spring Boot</span>
+            <span className="ab3-float ab3-float--b">⚛ React</span>
+            <span className="ab3-float ab3-float--c">🐳 Docker</span>
           </div>
-
         </div>
 
-        {/* SKILLS */}
-        <div className="skills-grid">
-          {SKILLS.map((skill) => (
-            <SkillCard key={skill.title} {...skill} />
-          ))}
+        <div className="ab3-marquee" aria-hidden="true">
+          <div className="ab3-track">
+            {[...MARQUEE, ...MARQUEE].map((t, i) => <span key={i}>{t}</span>)}
+          </div>
         </div>
 
+        <div className="ab3-grid">
+          {SKILLS.map((s) => <SkillCard key={s.title} {...s} />)}
+        </div>
       </div>
     </section>
   );
